@@ -31,7 +31,7 @@
         ------------------Web.Config-------------
       <appSettings>
         <add key="MailEnabled" value="1"/>
-        <add key="MailTo" value="niranjan.k.reddy@gsk.com" />
-        <add key="MailFrom" value="niranjan.k.reddy@gsk.com" />
+        <add key="MailTo" value="harishmouli.k@test.com" />
+        <add key="MailFrom" value="harishmouli.k@test.com" />
         <add key="Host" value="localhost" />
      </appSettings>
