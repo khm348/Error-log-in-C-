@@ -1,0 +1,37 @@
+ public static bool ErrorLogMail(string exceptionMsg,string subject, out string errorMsg)
+        {
+            errorMsg = string.Empty;
+            MailMessage mail = new MailMessage();
+            MailAddress mailTo = new MailAddress(System.Configuration.ConfigurationManager.AppSettings["MailTo"].ToString());
+            mail.To.Add(mailTo);
+            mail.From = new MailAddress(System.Configuration.ConfigurationManager.AppSettings["MailFrom"].ToString());
+            mail.Subject = subject + " in Prod server";
+            mail.Body = exceptionMsg;
+            // MailAddress Bcopy = new MailAddress(System.Configuration.ConfigurationManager.AppSettings["CC"].ToString());
+            // mail.CC.Add(Bcopy);
+            mail.IsBodyHtml = true;
+            mail.Priority = MailPriority.High;
+            SmtpClient client = new SmtpClient();
+            client.Host = System.Configuration.ConfigurationManager.AppSettings["Host"].ToString();
+            try
+            {
+                client.Send(mail);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Exception ex2 = ex;
+                errorMsg = ex.Message;
+                return false;
+            }
+        }
+        
+        
+        
+        ------------------Web.Config-------------
+      <appSettings>
+        <add key="MailEnabled" value="1"/>
+        <add key="MailTo" value="niranjan.k.reddy@gsk.com" />
+        <add key="MailFrom" value="niranjan.k.reddy@gsk.com" />
+        <add key="Host" value="localhost" />
+     </appSettings>
